@@ -19,18 +19,18 @@ var chartHeight = svgHeight - margin.top - margin.bottom;
 var svg = d3
     .select("#scatter")
     .append("svg")
-    .attr("preserveAspectRatio", "xMinyMin meet")
+    .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox","0 0 960 600")
     .classed("chart", true); ;
 
 // Append SVG group
 
 var chartGroup = svg.append("g")
-    .attr("transform", "translate(${margin.left}, ${margin.top})");
+    .attr("transform", 'translate(${margin.left}, ${margin.top})');
 
 // Get data from csv file
 
-d3.csv("D3_Data_Journalism/assets/data/data.csv").then(function(censusData){
+d3.csv("/assets/data/data.csv").then(function(censusData){
     console.log('Actual Data:', censusData)
 
         censusData.forEach(function(data){
