@@ -33,37 +33,39 @@ var chartGroup = svg.append("g")
 d3.csv("assets/data/data.csv").then(function(censusData){
     console.log('Actual Data:', censusData)
 
-        censusData.forEach(function(data){
+        censusData.forEach(function(data) {
             data.poverty = +data.poverty ;
             data.age = +data.age ;
             data.income = +data.income ;
             data.healthcare = +data.healthcare ;
             data.obesity = +data.obesity ;
             data.smokes = +data.smokes ;
-        });
+    });
 
-console.log('parsed data:', censusData)
+    
+    console.log('parsed data:', censusData)
 
-// create x and y axes
+  //Set default x and y values
+    var xValue = "poverty" ;
+    var yValue = "healthcare" ;
 
-var xValue = "poverty" ;
-var yValue = "healthcare" ;
+  // Call the function to calculate xScale and YScale for default x and y values
+    xyScales = createScales(censusData, xValue, yValue) ;
 
-xyScales = createScales(censusData, xValue, yValue) ;
+  //Get Xscale and YScale
+    xScale = xyScales[0];
+    yScale = xyScales[1]; 
 
-xScale = xyScales[0];
-yScale = xyScales[1];
+    // create axes with d3
 
-// create axes with d3
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
 
-var xAxis = d3.axisBottom(xScale);
-var yAxis = d3.axisLeft(yScale);
+    var xGroup = chartGroup.append("g").classed("xaxis", "true")
+        .attr("transform", `translate(0, ${chartHeight})`)
+        .call(xAxis);
 
-var xGroup = chartGroup.append("g").classed("xaxis", "true")
-    .attr("transform", `translate(0, ${chartHeight})`)
-    .call(xAxis);
-
-var yGroup = chartGroup.append("g").classed("yAxis", "true")
-        .call(yAxis)
-
-})
+    var yGroup = chartGroup.append("g").classed("yAxis", "true")
+        .call(yAxis);
+    }
+);
