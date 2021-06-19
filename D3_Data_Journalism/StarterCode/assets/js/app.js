@@ -59,4 +59,11 @@ yScale = xyScales[1];
 var xAxis = d3.axisBottom(xScale);
 var yAxis = d3.axisLeft(yScale);
 
+var xGroup = chartGroup.append("g").classed("xaxis", "true")
+    .attr("transform", `translate(0, ${chartHeight})`)
+    .call(xAxis);
+
+var yGroup = chartGroup.append("g").classed("yAxis", "true")
+        .call(yAxis)
+
 })
