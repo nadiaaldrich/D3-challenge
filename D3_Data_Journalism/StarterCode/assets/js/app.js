@@ -41,4 +41,22 @@ d3.csv("assets/data/data.csv").then(function(censusData){
             data.obesity = +data.obesity ;
             data.smokes = +data.smokes ;
         });
+
+console.log('parsed data:', censusData)
+
+// create x and y axes
+
+var xValue = "poverty" ;
+var yValue = "healthcare" ;
+
+xyScales = createScales(censusData, xValue, yValue) ;
+
+xScale = xyScales[0];
+yScale = xyScales[1];
+
+// create axes with d3
+
+var xAxis = d3.axisBottom(xScale);
+var yAxis = d3.axisLeft(yScale);
+
 })
